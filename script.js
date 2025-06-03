@@ -1,4 +1,4 @@
-    <script>
+
         // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -106,4 +106,4 @@
         // Initial setup
         document.body.style.opacity = '0';
         document.body.style.transition = 'opacity 0.5s ease-in-out';
-    </script>
+
