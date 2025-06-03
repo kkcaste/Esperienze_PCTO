@@ -3,37 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Le mie esperienze PCTO | Vincenzo Castelletti</title>
+    <title>Il mio viaggio PCTO | Vincenzo Castelletti</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2c3e50;
-            --secondary: #3498db;
-            --accent: #e74c3c;
-            --light: #ecf0f1;
-            --dark: #2c3e50;
-            --success: #2ecc71;
+            --primary: #1a2a3a;
+            --secondary: #4a6fa5;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --success: #40c057;
+            --timeline: #4a6fa5;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            src: url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfecg.woff2) format('woff2');
         }
         
         body {
             background-color: var(--light);
             color: var(--dark);
-            line-height: 1.6;
+            line-height: 1.7;
+            overflow-x: hidden;
         }
         
         header {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            background: linear-gradient(135deg, var(--primary), #2c3e50);
             color: white;
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 4rem 1rem;
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover;
+            opacity: 0.15;
+            z-index: 0;
         }
         
         header::after {
@@ -48,406 +75,816 @@
             z-index: 1;
         }
         
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+        .header-content {
             position: relative;
             z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
         
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             opacity: 0.9;
-            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
             z-index: 2;
+            cursor: pointer;
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem 2rem;
             position: relative;
-            z-index: 2;
         }
         
-        .timeline {
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
             position: relative;
-            padding: 2rem 0;
         }
         
-        .timeline::before {
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            display: inline-block;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        /* Timeline Stile Alternativo */
+        .timeline-alt {
+            position: relative;
+            padding: 3rem 0;
+        }
+        
+        .timeline-alt::before {
             content: '';
             position: absolute;
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 4px;
+            width: 6px;
             height: 100%;
-            background-color: var(--secondary);
+            background: linear-gradient(to bottom, var(--timeline), rgba(74, 111, 165, 0.3));
             z-index: 1;
+            border-radius: 3px;
         }
         
-        .timeline-item {
+        .timeline-item-alt {
             display: flex;
             justify-content: flex-end;
-            padding-right: 30px;
+            padding-right: 40px;
             position: relative;
-            margin: 2rem 0;
+            margin: 4rem 0;
             width: 50%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
         
-        .timeline-item:nth-child(odd) {
+        .timeline-item-alt.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .timeline-item-alt:nth-child(odd) {
             align-self: flex-end;
             justify-content: flex-start;
-            padding-left: 30px;
+            padding-left: 40px;
             padding-right: 0;
         }
         
-        .timeline-content {
+        .timeline-content-alt {
             background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
             width: 100%;
             position: relative;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(0,0,0,0.05);
         }
         
-        .timeline-item:hover .timeline-content {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        .timeline-item-alt:hover .timeline-content-alt {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
         
-        .timeline-content::before {
+        .timeline-content-alt::before {
             content: '';
             position: absolute;
-            right: -15px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 0;
-            border-top: 15px solid transparent;
-            border-bottom: 15px solid transparent;
-            border-left: 15px solid white;
-        }
-        
-        .timeline-item:nth-child(odd) .timeline-content::before {
-            right: auto;
-            left: -15px;
-            border-left: 0;
-            border-right: 15px solid white;
-        }
-        
-        .timeline-year {
-            position: absolute;
-            top: 20px;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--secondary);
-            z-index: 2;
-        }
-        
-        .timeline-item:nth-child(odd) .timeline-year {
-            right: -75px;
-        }
-        
-        .timeline-item:nth-child(even) .timeline-year {
-            left: -75px;
-        }
-        
-        .timeline-dot {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            right: -10px;
+            top: 50px;
             width: 20px;
             height: 20px;
+            background-color: white;
+            transform: rotate(45deg);
+            z-index: -1;
+        }
+        
+        .timeline-item-alt:nth-child(odd) .timeline-content-alt::before {
+            right: auto;
+            left: -10px;
+        }
+        
+        .timeline-year-alt {
+            position: absolute;
+            top: 20px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent);
+            z-index: 2;
+            background: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-item-alt:nth-child(odd) .timeline-year-alt {
+            right: -90px;
+        }
+        
+        .timeline-item-alt:nth-child(even) .timeline-year-alt {
+            left: -90px;
+        }
+        
+        .timeline-dot-alt {
+            position: absolute;
+            top: 60px;
+            width: 25px;
+            height: 25px;
             border-radius: 50%;
-            background-color: var(--accent);
+            background-color: white;
+            border: 5px solid var(--accent);
             z-index: 2;
         }
         
-        .timeline-item:nth-child(odd) .timeline-dot {
-            right: -38px;
+        .timeline-item-alt:nth-child(odd) .timeline-dot-alt {
+            right: -42px;
         }
         
-        .timeline-item:nth-child(even) .timeline-dot {
-            left: -38px;
+        .timeline-item-alt:nth-child(even) .timeline-dot-alt {
+            left: -42px;
         }
         
         h2 {
             color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
         }
         
         h3 {
             color: var(--secondary);
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        h3 i {
+            margin-right: 10px;
+            color: var(--accent);
         }
         
         .company {
             font-weight: bold;
             color: var(--accent);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             display: inline-block;
+            font-size: 1.2rem;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
         }
         
         .skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 1rem 0;
+            gap: 0.8rem;
+            margin: 1.5rem 0;
         }
         
         .skill {
             background-color: var(--light);
             color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            padding: 0.5rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
             font-weight: 500;
+            border: 1px solid rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill i {
+            margin-right: 5px;
+            font-size: 0.8rem;
         }
         
         .highlight {
-            background-color: rgba(46, 204, 113, 0.2);
+            background-color: rgba(64, 192, 87, 0.1);
             padding: 1.5rem;
             border-radius: 10px;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
             border-left: 4px solid var(--success);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight::before {
+            content: '★';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 3rem;
+            opacity: 0.1;
+            color: var(--success);
         }
         
         .highlight h4 {
             color: var(--success);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+        
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            height: 200px;
+            background: #ddd;
+            position: relative;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .gallery-item::after {
+            content: 'Inserisci immagine';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-left: 4px solid var(--secondary);
+            position: relative;
+        }
+        
+        .testimonial::before {
+            content: '"';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            font-size: 5rem;
+            color: rgba(74, 111, 165, 0.1);
+            font-family: serif;
+            line-height: 1;
+        }
+        
+        .testimonial-content {
+            position: relative;
+            z-index: 1;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--secondary);
+            text-align: right;
         }
         
         footer {
-            background-color: var(--dark);
+            background-color: var(--primary);
             color: white;
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 2rem;
             margin-top: 3rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background-color: var(--light);
+            transform: skewY(-3deg);
+            z-index: 1;
+        }
+        
+        .footer-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .timeline-year-alt {
+                font-size: 1.5rem;
+                padding: 0.3rem 1rem;
+            }
+            
+            .timeline-item-alt:nth-child(odd) .timeline-year-alt {
+                right: -70px;
+            }
+            
+            .timeline-item-alt:nth-child(even) .timeline-year-alt {
+                left: -70px;
+            }
         }
         
         @media (max-width: 768px) {
-            .timeline::before {
-                left: 31px;
+            header {
+                min-height: auto;
+                padding: 3rem 1rem;
             }
             
-            .timeline-item {
+            .timeline-alt::before {
+                left: 40px;
+            }
+            
+            .timeline-item-alt {
                 width: 100%;
-                padding-left: 70px;
+                padding-left: 80px;
                 padding-right: 0;
             }
             
-            .timeline-item:nth-child(odd) {
+            .timeline-item-alt:nth-child(odd) {
                 align-self: auto;
-                padding-left: 70px;
+                padding-left: 80px;
             }
             
-            .timeline-content::before {
+            .timeline-content-alt::before {
                 right: auto;
-                left: -15px;
-                border-left: 0;
-                border-right: 15px solid white;
+                left: -10px;
             }
             
-            .timeline-year {
+            .timeline-year-alt {
                 left: 0;
                 right: auto;
+                top: -25px;
             }
             
-            .timeline-dot {
-                left: 21px;
+            .timeline-dot-alt {
+                left: 31px;
                 right: auto;
+            }
+            
+            .image-gallery {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+        
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .timeline-content-alt {
+                padding: 1.5rem;
+            }
+            
+            .image-gallery {
+                grid-template-columns: 1fr;
             }
         }
         
         /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .timeline-item {
-            opacity: 0;
-            animation: fadeIn 0.6s forwards;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
         }
         
-        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
-        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
-        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        /* Toggle content avanzato */
+        .toggle-section {
+            margin: 1.5rem 0;
+        }
         
-        /* Toggle content */
+        .toggle-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(74, 111, 165, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .toggle-header:hover {
+            background: rgba(74, 111, 165, 0.2);
+        }
+        
+        .toggle-header h4 {
+            margin: 0;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .toggle-header h4 i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .toggle-header.active .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
         .toggle-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease;
+            padding: 0 1rem;
+            background: white;
+            border-radius: 0 0 8px 8px;
         }
         
-        .toggle-btn {
-            background: none;
-            border: none;
-            color: var(--secondary);
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            margin-top: 1rem;
-        }
-        
-        .toggle-btn::after {
-            content: '+';
-            margin-left: 0.5rem;
-            font-size: 1.2rem;
-        }
-        
-        .toggle-btn.active::after {
-            content: '-';
+        .toggle-header.active + .toggle-content {
+            max-height: 2000px;
+            padding: 1rem;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-top: none;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Le mie esperienze PCTO</h1>
-        <p class="subtitle">Un percorso di crescita in tre anni</p>
+        <div class="header-content">
+            <h1>Il mio viaggio PCTO</h1>
+            <p class="subtitle">Dalla teoria alla pratica: tre anni di crescita professionale</p>
+        </div>
+        <div class="scroll-down" onclick="document.querySelector('.timeline-alt').scrollIntoView({ behavior: 'smooth' })">
+            <i class="fas fa-chevron-down"></i>
+        </div>
     </header>
     
     <div class="container">
-        <div class="timeline">
+        <div class="section-title">
+            <h2>Le mie esperienze</h2>
+        </div>
+        
+        <div class="timeline-alt">
             <!-- Anno 3 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-year">2022</div>
-                <div class="timeline-content">
-                    <h2>Terzo Anno</h2>
-                    <span class="company">MAST - Bologna</span>
-                    <p>Scoperta del processo di creazione del packaging</p>
+            <div class="timeline-item-alt">
+                <div class="timeline-dot-alt"></div>
+                <div class="timeline-year-alt">III° Anno</div>
+                <div class="timeline-content-alt">
+                    <h2>Il mondo del packaging</h2>
+                    <span class="company"><i class="fas fa-box-open"></i> MAST - Bologna</span>
+                    <p>Esplorazione completa del processo creativo e produttivo degli imballaggi</p>
                     
-                    <div class="skills">
-                        <span class="skill">Design</span>
-                        <span class="skill">Creatività</span>
-                        <span class="skill">Comunicazione visiva</span>
-                        <span class="skill">Materiali</span>
+                    <div class="image-gallery">
+                        <div class="gallery-item"></div>
+                        <div class="gallery-item"></div>
+                        <div class="gallery-item"></div>
                     </div>
                     
-                    <button class="toggle-btn">Scopri di più</button>
-                    <div class="toggle-content">
-                        <h3>Cosa ho fatto</h3>
-                        <ul>
-                            <li>Studio delle fasi di realizzazione di un imballaggio</li>
-                            <li>Analisi dell'ideazione grafica e scelta materiali</li>
-                            <li>Approfondimento sulla produzione finale</li>
-                        </ul>
-                        
-                        <div class="highlight">
-                            <h4>Cosa ho imparato</h4>
-                            <p>L'importanza del design e della funzionalità nel packaging. Come la comunicazione visiva rende un prodotto riconoscibile.</p>
+                    <div class="toggle-section">
+                        <div class="toggle-header">
+                            <h4><i class="fas fa-tasks"></i> Attività svolte</h4>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="toggle-content">
+                            <ul>
+                                <li>Studio delle fasi di progettazione grafica del packaging</li>
+                                <li>Analisi dei materiali e loro impatto sull'ambiente</li>
+                                <li>Processo di produzione industriale</li>
+                                <li>Studio di casi di successo</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="toggle-section">
+                        <div class="toggle-header">
+                            <h4><i class="fas fa-lightbulb"></i> Competenze acquisite</h4>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="toggle-content">
+                            <div class="skills">
+                                <span class="skill"><i class="fas fa-palette"></i> Design creativo</span>
+                                <span class="skill"><i class="fas fa-recycle"></i> Materiali eco-friendly</span>
+                                <span class="skill"><i class="fas fa-eye"></i> Comunicazione visiva</span>
+                                <span class="skill"><i class="fas fa-project-diagram"></i> Processi produttivi</span>
+                            </div>
+                            
+                            <div class="highlight">
+                                <h4>Punti chiave</h4>
+                                <p>Ho capito come un packaging ben progettato possa influenzare le scelte dei consumatori e l'importanza della sostenibilità nella scelta dei materiali. L'esperienza ha stimolato la mia creatività e attenzione ai dettagli.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <!-- Anno 4 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-year">2024</div>
-                <div class="timeline-content">
-                    <h2>Quarto Anno</h2>
-                    <span class="company">JMA Teko - Castel San Pietro Terme</span>
-                    <p>Produzione di componenti wireless</p>
+            <div class="timeline-item-alt">
+                <div class="timeline-dot-alt"></div>
+                <div class="timeline-year-alt">IV° Anno</div>
+                <div class="timeline-content-alt">
+                    <h2>Produzione wireless</h2>
+                    <span class="company"><i class="fas fa-wifi"></i> JMA Teko - Castel San Pietro Terme</span>
+                    <p>Immersione nel mondo della produzione di componenti elettroniche</p>
                     
-                    <div class="skills">
-                        <span class="skill">Assemblaggio</span>
-                        <span class="skill">Collaudo</span>
-                        <span class="skill">Lavoro di squadra</span>
-                        <span class="skill">Autonomia</span>
+                    <div class="image-gallery">
+                        <div class="gallery-item"></div>
+                        <div class="gallery-item"></div>
+                        <div class="gallery-item"></div>
                     </div>
                     
-                    <button class="toggle-btn">Scopri di più</button>
-                    <div class="toggle-content">
-                        <h3>Reparti in cui ho lavorato</h3>
-                        <ul>
-                            <li>Assemblaggio dispositivi e componenti</li>
-                            <li>Collaudo finale (schede HPA, palo, remote, sub)</li>
-                            <li>Test a bassa potenza</li>
-                        </ul>
-                        
-                        <div class="highlight">
-                            <h4>Soft skills acquisite</h4>
-                            <p>Miglioramento nella comunicazione, lavoro di squadra, ascolto attivo e organizzazione. Superamento della timidezza.</p>
+                    <div class="toggle-section">
+                        <div class="toggle-header">
+                            <h4><i class="fas fa-cogs"></i> Mansioni principali</h4>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="toggle-content">
+                            <ul>
+                                <li>Assemblaggio di alimentatori e componenti elettronici</li>
+                                <li>Test a bassa potenza su schede elettroniche</li>
+                                <li>Collaudo finale dei dispositivi</li>
+                                <li>Controllo qualità preliminare</li>
+                            </ul>
+                            
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    "Vincenzo ha dimostrato grande attenzione nella fase di assemblaggio e curiosità nell'apprendere i processi produttivi. Si è integrato bene nel team di lavoro."
+                                </div>
+                                <div class="testimonial-author">- Mirco, Tutor aziendale</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="toggle-section">
+                        <div class="toggle-header">
+                            <h4><i class="fas fa-chart-line"></i> Crescita personale</h4>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="toggle-content">
+                            <div class="skills">
+                                <span class="skill"><i class="fas fa-users"></i> Teamwork</span>
+                                <span class="skill"><i class="fas fa-comments"></i> Comunicazione</span>
+                                <span class="skill"><i class="fas fa-user-check"></i> Autonomia</span>
+                                <span class="skill"><i class="fas fa-clock"></i> Gestione tempo</span>
+                            </div>
+                            
+                            <div class="highlight">
+                                <h4>Trasformazione</h4>
+                                <p>Questa esperienza mi ha aiutato a superare la timidezza iniziale e a lavorare in team con persone di diverse età ed esperienze. Ho imparato l'importanza della precisione nel lavoro manuale e della comunicazione efficace in ambito tecnico.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             
             <!-- Anno 5 -->
-            <div class="timeline-item">
-                <div class="timeline-dot"></div>
-                <div class="timeline-year">2024</div>
-                <div class="timeline-content">
-                    <h2>Quinto Anno</h2>
-                    <span class="company">Euroricambi - CED</span>
-                    <p>Gestione infrastrutture informatiche</p>
+            <div class="timeline-item-alt">
+                <div class="timeline-dot-alt"></div>
+                <div class="timeline-year-alt">V° Anno</div>
+                <div class="timeline-content-alt">
+                    <h2>Informatica aziendale</h2>
+                    <span class="company"><i class="fas fa-server"></i> Euroricambi - CED</span>
+                    <p>Gestione delle infrastrutture IT in un'azienda internazionale</p>
                     
-                    <div class="skills">
-                        <span class="skill">Informatica</span>
-                        <span class="skill">Coding</span>
-                        <span class="skill">Problem solving</span>
-                        <span class="skill">Configurazione PC</span>
+                    <div class="image-gallery">
+                        <div class="gallery-item"></div>
+                        <div class="gallery-item"></div>
+                        <div class="gallery-item"></div>
                     </div>
                     
-                    <button class="toggle-btn">Scopri di più</button>
-                    <div class="toggle-content">
-                        <h3>Attività principali</h3>
-                        <ul>
-                            <li>Configurazione computer aziendali</li>
-                            <li>Installazione Windows e software</li>
-                            <li>Trasferimento postazioni di lavoro</li>
-                            <li>Studio autonomo di linguaggi di programmazione</li>
-                        </ul>
-                        
-                        <div class="highlight">
-                            <h4>Competenze sviluppate</h4>
-                            <p>Capacità relazionali, competenze informatiche avanzate, problem solving e gestione del tempo. Scoperta di maggiore intraprendenza e autonomia.</p>
+                    <div class="toggle-section">
+                        <div class="toggle-header">
+                            <h4><i class="fas fa-laptop-code"></i> Progetti realizzati</h4>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="toggle-content">
+                            <ul>
+                                <li>Configurazione completa di PC aziendali (Windows, software, reti)</li>
+                                <li>Trasferimento e setup di postazioni di lavoro</li>
+                                <li>Risoluzione problemi tecnici di base</li>
+                                <li>Studio autonomo di linguaggi di programmazione</li>
+                            </ul>
+                            
+                            <div class="testimonial">
+                                <div class="testimonial-content">
+                                    "Abbiamo apprezzato la rapidità con cui Vincenzo ha appreso le procedure e la sua autonomia nel portare a termine i compiti assegnati. Mostra buone potenzialità nel campo informatico."
+                                </div>
+                                <div class="testimonial-author">- Davide, Collega CED</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="toggle-section">
+                        <div class="toggle-header">
+                            <h4><i class="fas fa-graduation-cap"></i> Apprendimenti</h4>
+                            <i class="fas fa-chevron-down toggle-icon"></i>
+                        </div>
+                        <div class="toggle-content">
+                            <div class="skills">
+                                <span class="skill"><i class="fas fa-code"></i> Programmazione</span>
+                                <span class="skill"><i class="fas fa-network-wired"></i> Reti aziendali</span>
+                                <span class="skill"><i class="fas fa-cogs"></i> Problem solving</span>
+                                <span class="skill"><i class="fas fa-user-tie"></i> Professionalità</span>
+                            </div>
+                            
+                            <div class="highlight">
+                                <h4>Scoperte personali</h4>
+                                <p>Ho scoperto di essere più intraprendente e capace di lavorare in autonomia di quanto pensassi. L'esperienza mi ha confermato l'interesse per l'informatica e dato una visione concreta del mondo del lavoro in questo settore.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <div class="section-title" style="margin-top: 5rem;">
+            <h2>Competenze trasversali</h2>
+        </div>
+        
+        <div class="skills-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                <h3 style="color: var(--accent);"><i class="fas fa-people-arrows"></i> Relazionali</h3>
+                <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                    <li>Comunicazione efficace</li>
+                    <li>Lavoro di squadra</li>
+                    <li>Adattamento a diversi contesti</li>
+                    <li>Gestione rapporti professionali</li>
+                </ul>
+            </div>
+            
+            <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                <h3 style="color: var(--accent);"><i class="fas fa-brain"></i> Cognitive</h3>
+                <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                    <li>Problem solving</li>
+                    <li>Apprendimento rapido</li>
+                    <li>Attenzione ai dettagli</li>
+                    <li>Pensiero critico</li>
+                </ul>
+            </div>
+            
+            <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05);">
+                <h3 style="color: var(--accent);"><i class="fas fa-user"></i> Personali</h3>
+                <ul style="margin-top: 1rem; padding-left: 1.5rem;">
+                    <li>Autonomia</li>
+                    <li>Responsabilità</li>
+                    <li>Flessibilità</li>
+                    <li>Gestione del tempo</li>
+                </ul>
+            </div>
+        </div>
     </div>
     
     <footer>
-        <p>Vincenzo Castelletti - Classe 5CIN | Percorso PCTO 2022-2024</p>
+        <div class="footer-content">
+            <h3 style="color: white; margin-bottom: 1rem;">Vincenzo Castelletti</h3>
+            <p>Percorso PCTO 2022-2024 | Classe 5CIN</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-envelope"></i></a>
+                <a href="#"><i class="fas fa-file-pdf"></i></a>
+            </div>
+            
+            <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8;">
+                Sito realizzato per documentare il percorso di alternanza scuola-lavoro
+            </p>
+        </div>
     </footer>
     
     <script>
-        // Toggle content
-        document.querySelectorAll('.toggle-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const content = button.nextElementSibling;
-                button.classList.toggle('active');
-                
-                if (content.style.maxHeight) {
-                    content.style.maxHeight = null;
-                } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                }
-            });
-        });
+        // Animazione timeline al scroll
+        const timelineItems = document.querySelectorAll('.timeline-item-alt');
         
-        // Animate timeline items when they come into view
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
+                    entry.target.classList.add('visible');
                 }
             });
         }, { threshold: 0.1 });
         
-        document.querySelectorAll('.timeline-item').forEach(item => {
+        timelineItems.forEach(item => {
             observer.observe(item);
+        });
+        
+        // Toggle sections
+        document.querySelectorAll('.toggle-header').forEach(header => {
+            header.addEventListener('click', () => {
+                header.classList.toggle('active');
+            });
+        });
+        
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
         });
     </script>
 </body>
