@@ -3,182 +3,452 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet">
-    <script src="script.js"></script>
-    <title>Il mio percorso PCTO in tre anni</title>
-
+    <title>Le mie esperienze PCTO | Vincenzo Castelletti</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --success: #2ecc71;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background-color: var(--light);
+            transform: skewY(-3deg);
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background-color: var(--secondary);
+            z-index: 1;
+        }
+        
+        .timeline-item {
+            display: flex;
+            justify-content: flex-end;
+            padding-right: 30px;
+            position: relative;
+            margin: 2rem 0;
+            width: 50%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            align-self: flex-end;
+            justify-content: flex-start;
+            padding-left: 30px;
+            padding-right: 0;
+        }
+        
+        .timeline-content {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 100%;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .timeline-item:hover .timeline-content {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 15px solid white;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: auto;
+            left: -15px;
+            border-left: 0;
+            border-right: 15px solid white;
+        }
+        
+        .timeline-year {
+            position: absolute;
+            top: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+            z-index: 2;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-year {
+            right: -75px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-year {
+            left: -75px;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            z-index: 2;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -38px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -38px;
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .company {
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .skill {
+            background-color: var(--light);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .highlight {
+            background-color: rgba(46, 204, 113, 0.2);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--success);
+        }
+        
+        .highlight h4 {
+            color: var(--success);
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 0;
+            }
+            
+            .timeline-item:nth-child(odd) {
+                align-self: auto;
+                padding-left: 70px;
+            }
+            
+            .timeline-content::before {
+                right: auto;
+                left: -15px;
+                border-left: 0;
+                border-right: 15px solid white;
+            }
+            
+            .timeline-year {
+                left: 0;
+                right: auto;
+            }
+            
+            .timeline-dot {
+                left: 21px;
+                right: auto;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .timeline-item {
+            opacity: 0;
+            animation: fadeIn 0.6s forwards;
+        }
+        
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        
+        /* Toggle content */
+        .toggle-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: var(--secondary);
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .toggle-btn::after {
+            content: '+';
+            margin-left: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .toggle-btn.active::after {
+            content: '-';
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <a href="#hero" class="active">Home</a>
-        <a href="#exp1">2022</a>
-        <a href="#exp2">2024</a>
-        <a href="#exp3">2024</a>
-        <a href="#conclusion">Conclusioni</a>
-    </nav>
-
-    <!-- Timeline -->
-    <div class="timeline">
-        <div class="timeline-dot active" data-target="hero"></div>
-        <div class="timeline-dot" data-target="exp1"></div>
-        <div class="timeline-dot" data-target="exp2"></div>
-        <div class="timeline-dot" data-target="exp3"></div>
-        <div class="timeline-dot" data-target="conclusion"></div>
+    <header>
+        <h1>Le mie esperienze PCTO</h1>
+        <p class="subtitle">Un percorso di crescita in tre anni</p>
+    </header>
+    
+    <div class="container">
+        <div class="timeline">
+            <!-- Anno 3 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2022</div>
+                <div class="timeline-content">
+                    <h2>Terzo Anno</h2>
+                    <span class="company">MAST - Bologna</span>
+                    <p>Scoperta del processo di creazione del packaging</p>
+                    
+                    <div class="skills">
+                        <span class="skill">Design</span>
+                        <span class="skill">Creatività</span>
+                        <span class="skill">Comunicazione visiva</span>
+                        <span class="skill">Materiali</span>
+                    </div>
+                    
+                    <button class="toggle-btn">Scopri di più</button>
+                    <div class="toggle-content">
+                        <h3>Cosa ho fatto</h3>
+                        <ul>
+                            <li>Studio delle fasi di realizzazione di un imballaggio</li>
+                            <li>Analisi dell'ideazione grafica e scelta materiali</li>
+                            <li>Approfondimento sulla produzione finale</li>
+                        </ul>
+                        
+                        <div class="highlight">
+                            <h4>Cosa ho imparato</h4>
+                            <p>L'importanza del design e della funzionalità nel packaging. Come la comunicazione visiva rende un prodotto riconoscibile.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Anno 4 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2024</div>
+                <div class="timeline-content">
+                    <h2>Quarto Anno</h2>
+                    <span class="company">JMA Teko - Castel San Pietro Terme</span>
+                    <p>Produzione di componenti wireless</p>
+                    
+                    <div class="skills">
+                        <span class="skill">Assemblaggio</span>
+                        <span class="skill">Collaudo</span>
+                        <span class="skill">Lavoro di squadra</span>
+                        <span class="skill">Autonomia</span>
+                    </div>
+                    
+                    <button class="toggle-btn">Scopri di più</button>
+                    <div class="toggle-content">
+                        <h3>Reparti in cui ho lavorato</h3>
+                        <ul>
+                            <li>Assemblaggio dispositivi e componenti</li>
+                            <li>Collaudo finale (schede HPA, palo, remote, sub)</li>
+                            <li>Test a bassa potenza</li>
+                        </ul>
+                        
+                        <div class="highlight">
+                            <h4>Soft skills acquisite</h4>
+                            <p>Miglioramento nella comunicazione, lavoro di squadra, ascolto attivo e organizzazione. Superamento della timidezza.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Anno 5 -->
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-year">2024</div>
+                <div class="timeline-content">
+                    <h2>Quinto Anno</h2>
+                    <span class="company">Euroricambi - CED</span>
+                    <p>Gestione infrastrutture informatiche</p>
+                    
+                    <div class="skills">
+                        <span class="skill">Informatica</span>
+                        <span class="skill">Coding</span>
+                        <span class="skill">Problem solving</span>
+                        <span class="skill">Configurazione PC</span>
+                    </div>
+                    
+                    <button class="toggle-btn">Scopri di più</button>
+                    <div class="toggle-content">
+                        <h3>Attività principali</h3>
+                        <ul>
+                            <li>Configurazione computer aziendali</li>
+                            <li>Installazione Windows e software</li>
+                            <li>Trasferimento postazioni di lavoro</li>
+                            <li>Studio autonomo di linguaggi di programmazione</li>
+                        </ul>
+                        
+                        <div class="highlight">
+                            <h4>Competenze sviluppate</h4>
+                            <p>Capacità relazionali, competenze informatiche avanzate, problem solving e gestione del tempo. Scoperta di maggiore intraprendenza e autonomia.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero">
-        <div class="hero-content">
-            <h1>Il mio percorso PCTO in tre anni</h1>
-            <p class="subtitle">Dalla creatività del packaging all'innovazione tecnologica: un viaggio formativo attraverso esperienze concrete nel mondo del lavoro</p>
-            <a href="#exp1" class="cta-button">Scopri il mio percorso</a>
-        </div>
-        <div class="scroll-indicator">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 5v14M19 12l-7 7-7-7"/>
-            </svg>
-        </div>
-    </section>
-
-    <!-- Main Content -->
-    <main class="content">
-        <!-- Experience 1: MAST -->
-        <section id="exp1" class="experience">
-            <div class="experience-card fade-in">
-                <div class="experience-image mast">
-                    <!-- Placeholder per immagine MAST - sostituire con: <img src="img/mast_packaging.jpg" alt="MAST Bologna"> -->
-                </div>
-                <div class="experience-content">
-                    <div class="year-badge">Terzo Anno - 2022</div>
-                    <h2>Il Design del Packaging</h2>
-                    <p>Un'immersione nel mondo della comunicazione visiva presso il MAST di Bologna, dove ho scoperto l'importanza del design e della funzionalità nel confezionamento dei prodotti.</p>
-                    
-                    <div class="info-box">
-                        <div class="info-item">
-                            <span class="info-label">Luogo:</span>
-                            <span class="info-value">MAST - Bologna</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Periodo:</span>
-                            <span class="info-value">Novembre - Dicembre 2022</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Focus:</span>
-                            <span class="info-value">Processo creativo e produttivo</span>
-                        </div>
-                    </div>
-
-                    <div class="skills-list">
-                        <span class="skill-tag">Creatività</span>
-                        <span class="skill-tag">Design Thinking</span>
-                        <span class="skill-tag">Comunicazione Visiva</span>
-                        <span class="skill-tag">Attenzione ai Dettagli</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience 2: JMA Teko -->
-        <section id="exp2" class="experience">
-            <div class="experience-card fade-in">
-                <div class="experience-content">
-                    <div class="year-badge">Quarto Anno - 2024</div>
-                    <h2>Tecnologia Wireless</h2>
-                    <p>Un mese intensivo presso JMA Teko, specializzata in componenti wireless, dove ho sviluppato competenze tecniche e soft skills in un ambiente industriale dinamico.</p>
-                    
-                    <div class="info-box">
-                        <div class="info-item">
-                            <span class="info-label">Luogo:</span>
-                            <span class="info-value">JMA Teko - Castel San Pietro Terme</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Periodo:</span>
-                            <span class="info-value">Maggio - Giugno 2024</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Reparti:</span>
-                            <span class="info-value">Assemblaggio e Collaudo</span>
-                        </div>
-                    </div>
-
-                    <div class="skills-list">
-                        <span class="skill-tag">Lavoro di Squadra</span>
-                        <span class="skill-tag">Assemblaggio Tecnico</span>
-                        <span class="skill-tag">Controllo Qualità</span>
-                        <span class="skill-tag">Autonomia Operativa</span>
-                        <span class="skill-tag">Comunicazione</span>
-                    </div>
-                </div>
-                <div class="experience-image jma">
-                    <!-- Placeholder per immagine JMA - sostituire con: <img src="img/jma_teko.jpg" alt="JMA Teko"> -->
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience 3: Euroricambi -->
-        <section id="exp3" class="experience">
-            <div class="experience-card fade-in">
-                <div class="experience-image euroricambi">
-                    <!-- Placeholder per immagine Euroricambi - sostituire con: <img src="img/euroricambi.jpg" alt="Euroricambi CED"> -->
-                </div>
-                <div class="experience-content">
-                    <div class="year-badge">Quinto Anno - 2024</div>
-                    <h2>Centro Elaborazione Dati</h2>
-                    <p>L'esperienza più completa nel reparto CED di Euroricambi, dove ho gestito postazioni informatiche, sviluppato competenze di coding e scoperto le mie capacità organizzative.</p>
-                    
-                    <div class="info-box">
-                        <div class="info-item">
-                            <span class="info-label">Luogo:</span>
-                            <span class="info-value">Euroricambi - Reparto CED</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Periodo:</span>
-                            <span class="info-value">Novembre - Dicembre 2024</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Focus:</span>
-                            <span class="info-value">Gestione IT e Problem Solving</span>
-                        </div>
-                    </div>
-
-                    <div class="skills-list">
-                        <span class="skill-tag">Configurazione PC</span>
-                        <span class="skill-tag">HTML/CSS/JavaScript</span>
-                        <span class="skill-tag">Problem Solving</span>
-                        <span class="skill-tag">Gestione Reti</span>
-                        <span class="skill-tag">Autonomia</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Conclusion Section -->
-    <section id="conclusion" class="conclusion">
-        <h2>Il Valore del Percorso</h2>
-        <p>Tre anni, tre esperienze, un unico obiettivo: crescere professionalmente e personalmente. Ogni stage ha contribuito a formare le mie competenze trasversali e a orientare le mie scelte future nel mondo del lavoro.</p>
+    
+    <footer>
+        <p>Vincenzo Castelletti - Classe 5CIN | Percorso PCTO 2022-2024</p>
+    </footer>
+    
+    <script>
+        // Toggle content
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                button.classList.toggle('active');
+                
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        });
         
-        <div class="skills-grid fade-in">
-            <div class="skill-card">
-                <h3>Competenze Tecniche</h3>
-                <p>Configurazione sistemi, coding, assemblaggio componenti, controllo qualità</p>
-            </div>
-            <div class="skill-card">
-                <h3>Soft Skills</h3>
-                <p>Comunicazione, lavoro di squadra, problem solving, gestione del tempo</p>
-            </div>
-            <div class="skill-card">
-                <h3>Crescita Personale</h3>
-                <p>Maggiore autonomia, fiducia in me stesso, capacità organizzative, adattabilità</p>
-            </div>
-            <div class="skill-card">
-                <h3>Visione Futura</h3>
-                <p>Orientamento professionale, comprensione del mondo del lavoro, networking</p>
-            </div>
-        </div>
-    </section>
-
-
+        // Animate timeline items when they come into view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+    </script>
 </body>
 </html>
