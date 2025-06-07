@@ -3,25 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>I miei PCTO | Vincenzo Castelletti</title>
+    <title>Il Mio Percorso PCTO | Vincenzo Castelletti</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="https://img.icons8.com/?size=100&id=9489&format=png&color=000000">
     <style>
         :root {
-            --primary: #0a192f;
-            --secondary: #64ffda;
-            --accent: #ff6482;
-            --light: #ccd6f6;
-            --dark: #020c1b;
-            --slide-bg: #112240;
-            --nav-dot: #495670;
-        }
-        
-        @font-face {
-            font-family: 'Calibre';
-            src: url('https://fonts.cdnfonts.com/css/calibre') format('woff2');
-            font-weight: normal;
-            font-style: normal;
+            --primary: #ff4d4d;
+            --secondary: #4d79ff;
+            --tertiary: #4dffb8;
+            --dark: #222;
+            --light: #f8f8f8;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
         
         * {
@@ -31,720 +25,1022 @@
         }
         
         body {
-            font-family: 'Calibre', -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: var(--dark);
-            color: var(--light);
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
         
-        /* Navigation Dots */
-        .nav-dots {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 100;
+        h1, h2, h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        
+        .hero {
+            height: 100vh;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-        }
-        
-        .dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--nav-dot);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .dot.active {
-            background-color: var(--secondary);
-            transform: scale(1.2);
-        }
-        
-        .dot::after {
-            content: attr(data-year);
-            position: absolute;
-            right: 25px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--secondary);
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .dot:hover::after {
-            opacity: 1;
-        }
-        
-        /* Slides */
-        .slide {
-            min-height: 100vh;
-            padding: 100px 10%;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            opacity: 0.3;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-        
-        .slide.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .slide::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 70% 20%, rgba(10, 25, 47, 0.8) 0%, rgba(10, 25, 47, 0.95) 100%);
-            z-index: -1;
-        }
-        
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-            opacity: 0.15;
-        }
-        
-        .slide-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-        
-        .slide-text {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .slide-number {
-            position: absolute;
-            top: -50px;
-            left: -30px;
-            font-size: 120px;
-            font-weight: 700;
-            color: rgba(100, 255, 218, 0.07);
-            z-index: -1;
-            pointer-events: none;
-        }
-        
-        .slide-title {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-            color: var(--light);
-            position: relative;
-            display: inline-block;
-            z-index: 2;
-        }
-        
-        .slide-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 70%;
-            height: 2px;
-            background-color: var(--secondary);
-        }
-        
-        .company {
-            display: inline-block;
-            font-size: 1.2rem;
-            color: var(--secondary);
-            margin-bottom: 30px;
-            padding: 5px 15px;
-            border: 1px solid var(--secondary);
-            border-radius: 4px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .slide-description {
-            margin-bottom: 30px;
-            line-height: 1.8;
-            font-size: 1.1rem;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .skill {
-            background-color: rgba(100, 255, 218, 0.1);
-            color: var(--secondary);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            border: 1px solid var(--secondary);
-        }
-        
-        .slide-image {
-            position: relative;
-            perspective: 1000px;
-            z-index: 2;
-        }
-        
-        .image-card {
-            background-color: var(--slide-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 20px 30px -15px rgba(2, 12, 27, 0.7);
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease;
-            height: 400px;
-            position: relative;
-        }
-        
-        .image-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-        }
-        
-        .image-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        /* Intro Slide */
-        #intro {
-            text-align: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--primary), #020c1b);
-        }
-        
-        #intro .slide-content {
-            grid-template-columns: 1fr;
+            align-items: center;
             text-align: center;
+            padding: 0 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
         
-        #intro .slide-title {
-            font-size: 3.5rem;
-            margin-bottom: 30px;
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            z-index: 2;
+            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease-out;
+            line-height: 1.1;
         }
         
-        #intro .slide-title::after {
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50%;
-        }
-        
-        #intro .subtitle {
+        .hero p {
             font-size: 1.5rem;
             max-width: 800px;
-            margin: 0 auto 40px;
-            color: var(--light);
-            opacity: 0.9;
-            position: relative;
             z-index: 2;
+            animation: fadeIn 1s ease-out 0.3s both;
+            margin-bottom: 2rem;
         }
         
-        .scroll-hint {
+        .hero::after {
+            content: '';
             position: absolute;
-            bottom: 80px;
+            width: 300%;
+            height: 300%;
+            top: -100%;
+            left: -100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="white" fill-opacity="0.05" points="50,0 100,0 50,100 0,100"/></svg>');
+            background-size: 50px 50px;
+            animation: moveBg 30s linear infinite;
+            z-index: 1;
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            color: var(--light);
-            font-size: 0.9rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            opacity: 0.7;
+            color: white;
+            font-size: 2rem;
             animation: bounce 2s infinite;
             z-index: 2;
+            cursor: pointer;
         }
         
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-            40% { transform: translateY(-10px) translateX(-50%); }
-            60% { transform: translateY(-5px) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
         }
         
-        /* Slide navigation buttons */
-        .slide-nav {
-            position: fixed;
-            bottom: 30px;
+        @keyframes moveBg {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+        }
+        
+        .experience {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.5s ease;
+        }
+        
+        .experience.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .experience:nth-child(odd) {
+            left: 0;
+        }
+        
+        .experience:nth-child(even) {
+            left: 50%;
+        }
+        
+        .experience::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            right: -20px;
+            background-color: white;
+            border: 5px solid var(--secondary);
+            top: 15px;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: var(--shadow);
+        }
+        
+        .experience:nth-child(even)::after {
+            left: -20px;
+        }
+        
+        .experience-content {
+            padding: 2rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            position: relative;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .experience-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .experience-content::before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            top: 20px;
+        }
+        
+        .experience:nth-child(odd) .experience-content::before {
+            border-width: 10px 0 10px 10px;
+            border-color: transparent transparent transparent white;
+            right: -10px;
+        }
+        
+        .experience:nth-child(even) .experience-content::before {
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+            left: -10px;
+        }
+        
+        .experience h2 {
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .experience h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--tertiary));
+        }
+        
+        .experience h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .experience p, .experience ul {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+        
+        .experience ul {
+            padding-left: 1.5rem;
+        }
+        
+        .experience li {
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+        
+        .experience li::before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .skill {
+            background-color: var(--tertiary);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .skill:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .year-marker {
+            position: absolute;
+            top: -30px;
             left: 50%;
             transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            z-index: 100;
+            background-color: var(--dark);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: bold;
+            z-index: 2;
+            box-shadow: var(--shadow);
+            font-size: 1.2rem;
         }
         
-        .nav-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background-color: rgba(100, 255, 218, 0.1);
-            border: 1px solid var(--secondary);
-            color: var(--secondary);
+        .experience-image {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .experience-image:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Modal per immagini */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            overflow: auto;
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            margin-top: 5vh;
+            animation: zoom 0.3s;
+        }
+        
+        @keyframes zoom {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: var(--tertiary);
+        }
+        
+        /* Sezione aziende migliorata */
+        .companies {
             display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin: 8rem auto;
+            max-width: 1400px;
+            padding: 0 2rem;
+        }
+        
+        .company-card {
+            width: 350px;
+            height: 450px;
+            perspective: 1000px;
+            position: relative;
+        }
+        
+        .company-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        .company-card:hover .company-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .company-front, .company-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        
+        .company-front {
+            background-color: white;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            padding: 2rem;
+            text-align: center;
         }
         
-        .nav-btn:hover {
-            background-color: rgba(100, 255, 218, 0.2);
+        .company-logo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 5px solid white;
+            position: relative;
+        }
+        
+        .company-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .company-logo::after {
+            content: 'Clicca per scoprire di più';
+            position: absolute;
+            bottom: -30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: all 0.3s;
+        }
+        
+        .company-card:hover .company-logo::after {
+            opacity: 1;
+            bottom: -25px;
+        }
+        
+        .company-back {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            transform: rotateY(180deg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .company-back h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .company-back ul {
+            list-style-type: none;
+            margin-bottom: 2rem;
+        }
+        
+        .company-back li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+            text-align: left;
+        }
+        
+        .company-back li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--tertiary);
+            font-weight: bold;
+        }
+        
+        .company-link {
+            display: inline-block;
+            margin-top: auto;
+            padding: 0.8rem 1.5rem;
+            background-color: white;
+            color: var(--secondary);
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .company-link:hover {
+            background-color: var(--tertiary);
+            color: var(--dark);
             transform: translateY(-3px);
         }
         
-        /* Responsive */
-        @media (max-width: 992px) {
-            .slide-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .slide-image {
-                order: -1;
-                max-width: 80%;
-                margin: 0 auto;
-            }
-            
-            .nav-dots {
-                right: 15px;
-            }
-            
-            .slide-number {
-                top: -40px;
-                left: -20px;
-                font-size: 100px;
-            }
+        /* Sezione citazione */
+        .quote-section {
+            background: linear-gradient(135deg, var(--tertiary), var(--secondary));
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+            clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
+            margin: 5rem 0;
         }
         
-        @media (max-width: 768px) {
-            .slide {
-                padding: 80px 5%;
-            }
-            
-            #intro .slide-title {
-                font-size: 2.5rem;
-            }
-            
-            .slide-title {
-                font-size: 2rem;
-            }
-            
-            .image-card {
-                height: 300px;
-            }
-            
-            .nav-dots {
-                display: none;
-            }
-            
-            .slide-number {
-                font-size: 80px;
-                top: -30px;
-                left: -15px;
-            }
-        }
-        
-        /* Toggle sections */
-        .toggle-section {
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .toggle-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            background-color: rgba(100, 255, 218, 0.05);
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .toggle-header:hover {
-            background-color: rgba(100, 255, 218, 0.1);
-        }
-        
-        .toggle-header h4 {
-            font-size: 1.1rem;
-            color: var(--light);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .toggle-icon {
-            transition: transform 0.3s ease;
-        }
-        
-        .toggle-header.active .toggle-icon {
-            transform: rotate(180deg);
-        }
-        
-        .toggle-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease;
-            padding: 0 15px;
-            background-color: rgba(10, 25, 47, 0.5);
-            border-radius: 0 0 5px 5px;
-        }
-        
-        .toggle-header.active + .toggle-content {
-            max-height: 1000px;
-            padding: 15px;
-            border: 1px solid rgba(100, 255, 218, 0.1);
-            border-top: none;
-        }
-        
-        .activity-list {
-            list-style-type: none;
-        }
-        
-        .activity-list li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 25px;
-        }
-        
-        .activity-list li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--secondary);
-        }
-        
-        /* Testimonial */
-        .testimonial {
-            margin-top: 30px;
-            padding: 20px;
-            border-left: 3px solid var(--secondary);
-            background-color: rgba(10, 25, 47, 0.5);
-            position: relative;
-        }
-        
-        .testimonial::before {
-            content: '"';
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 4rem;
-            color: rgba(100, 255, 218, 0.1);
-            font-family: serif;
-            line-height: 1;
-        }
-        
-        .testimonial-content {
-            position: relative;
-            z-index: 1;
+        .quote {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.8rem;
+            font-family: 'Playfair Display', serif;
             font-style: italic;
-            margin-bottom: 10px;
+            position: relative;
         }
         
-        .testimonial-author {
-            text-align: right;
+        .quote::before, .quote::after {
+            content: '"';
+            font-size: 4rem;
+            color: rgba(255,255,255,0.2);
+            position: absolute;
+        }
+        
+        .quote::before {
+            top: -30px;
+            left: -40px;
+        }
+        
+        .quote::after {
+            bottom: -60px;
+            right: -40px;
+        }
+        
+        .quote-author {
+            margin-top: 2rem;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* Footer migliorato */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 5rem 2rem;
+            margin-top: 5rem;
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="white" fill-opacity="0.03" points="0,100 100,0 100,100"/></svg>');
+            background-size: 50px 50px;
+        }
+        
+        footer h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        footer h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--tertiary);
+        }
+        
+        footer p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--tertiary);
+            margin-top: 2rem;
+            position: relative;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-link {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            color: var(--tertiary);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive design */
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .experience {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .experience:nth-child(even) {
+                left: 0;
+            }
+            
+            .experience::after {
+                left: 18px !important;
+            }
+            
+            .experience:nth-child(odd) .experience-content::before {
+                border-width: 10px 10px 10px 0;
+                border-color: transparent white transparent transparent;
+                left: -10px;
+                right: auto;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .company-card {
+                width: 300px;
+                height: 400px;
+            }
+            
+            .quote {
+                font-size: 1.4rem;
+            }
+        }
+        
+        /* Animazioni speciali */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .glow {
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 5px white; }
+            to { text-shadow: 0 0 15px white, 0 0 20px var(--tertiary); }
+        }
+        
+        /* Sezione competenze */
+        .skills-section {
+            max-width: 1200px;
+            margin: 5rem auto;
+            padding: 0 2rem;
+        }
+        
+        .skills-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            position: relative;
+        }
+        
+        .skills-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .skill-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .skill-card h3 {
             color: var(--secondary);
-            font-weight: 500;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Dots -->
-    <div class="nav-dots">
-        <div class="dot active" data-year="Presentazione" onclick="goToSlide(0)"></div>
-        <div class="dot" data-year="III° Anno" onclick="goToSlide(1)"></div>
-        <div class="dot" data-year="IV° Anno" onclick="goToSlide(2)"></div>
-        <div class="dot" data-year="V° Anno" onclick="goToSlide(3)"></div>
-    </div>
-    
-    <!-- Slide Navigation -->
-    <div class="slide-nav">
-        <div class="nav-btn" id="prev-btn"><i class="fas fa-chevron-left"></i></div>
-        <div class="nav-btn" id="next-btn"><i class="fas fa-chevron-right"></i></div>
-    </div>
-    
-    <!-- Intro Slide -->
-    <section class="slide active" id="intro">
-        <div class="slide-content">
-            <div class="slide-text">
-                <h1 class="slide-title">Il Mio Percorso PCTO</h1>
-                <p class="subtitle">Dalla teoria alla pratica: un viaggio triennale tra creatività, tecnologia e professionalità</p>
-                <div class="scroll-hint">
-                    <span>Scorri per esplorare</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-            </div>
+    <section class="hero">
+        <h1 class="floating">Il Mio Viaggio PCTO</h1>
+        <p class="pulse">Dalla teoria alla pratica: tre esperienze che hanno plasmato la mia crescita professionale e personale</p>
+        <div class="scroll-down glow" onclick="document.querySelector('.timeline').scrollIntoView({ behavior: 'smooth' })">
+            <i class="fas fa-chevron-down"></i>
         </div>
     </section>
-    
-    <!-- Slide 1: Terzo Anno -->
-    <section class="slide" id="slide1">
-        <img src="img/bgMAST.jpg" alt="Background" class="slide-bg">
-        <div class="slide-content">
-            <div class="slide-text">
-                <span class="slide-number">01</span>
-                <h2 class="slide-title">Design del Packaging</h2>
-                <span class="company"><i class="fas fa-box-open"></i> MAST - Bologna</span>
-                <p class="slide-description">Esplorazione completa del processo creativo e produttivo degli imballaggi, dalla progettazione grafica alla scelta dei materiali sostenibili.</p>
+
+    <div class="timeline">
+        <div class="year-marker">2022</div>
+        
+        <div class="experience">
+            <div class="experience-content">
+                <h2>MAST Bologna</h2>
+                <h3>Design del Packaging</h3>
                 
-                <div class="skills-container">
-                    <span class="skill">Design creativo</span>
-                    <span class="skill">Materiali eco-friendly</span>
-                    <span class="skill">Comunicazione visiva</span>
-                    <span class="skill">Processi produttivi</span>
-                </div>
+                <!-- Immagine aggiunta -->
+                <img src="mast.png" 
+                     alt="Design packaging MAST" 
+                     class="experience-image"
+                     onclick="openModal(this)">
                 
-                <div class="toggle-section">
-                    <div class="toggle-header">
-                        <h4><i class="fas fa-tasks"></i> Attività svolte</h4>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
-                    </div>
-                    <div class="toggle-content">
-                        <ul class="activity-list">
-                            <li>Studio delle fasi di progettazione grafica del packaging</li>
-                            <li>Analisi dei materiali e loro impatto sull'ambiente</li>
-                            <li>Osservazione del processo di produzione industriale</li>
-                            <li>Studio di casi di successo nel design degli imballaggi</li>
-                        </ul>
-                    </div>
-                </div>
+                <p>Durante il mio percorso PCTO di terza superiore ho svolto un'esperienza formativa presso il MAST di Bologna, focalizzata sul processo di creazione del packaging.</p>
                 
-                <div class="toggle-section">
-                    <div class="toggle-header">
-                        <h4><i class="fas fa-lightbulb"></i> Cosa ho imparato</h4>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
-                    </div>
-                    <div class="toggle-content">
-                        <p>Ho scoperto come un packaging ben progettato possa influenzare le scelte dei consumatori e l'importanza della sostenibilità nella scelta dei materiali. L'esperienza ha stimolato la mia creatività e attenzione ai dettagli visivi.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="slide-image">
-                <div class="image-card">
-                    <!-- SOSTITUIRE CON LA PROPRIA IMMAGINE -->
-                    <img src="img/imgMAST.png" alt="Esperienza MAST">
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Slide 2: Quarto Anno -->
-    <section class="slide" id="slide2">
-        <img src="img/bgJMA.jpg" alt="Background" class="slide-bg">
-        <div class="slide-content">
-            <div class="slide-text">
-                <span class="slide-number">02</span>
-                <h2 class="slide-title">Produzione Wireless</h2>
-                <span class="company"><i class="fas fa-wifi"></i> JMA Teko - Castel S.P.</span>
-                <p class="slide-description">Immersione nel mondo della produzione di componenti elettroniche wireless, dall'assemblaggio al collaudo finale.</p>
+                <ul>
+                    <li>Conoscenza delle diverse fasi di realizzazione di un imballaggio</li>
+                    <li>Dall'ideazione grafica alla scelta dei materiali</li>
+                    <li>Importanza del design e della funzionalità</li>
+                    <li>Ruolo fondamentale della comunicazione visiva</li>
+                </ul>
                 
-                <div class="skills-container">
-                    <span class="skill">Assemblaggio</span>
-                    <span class="skill">Collaudo</span>
-                    <span class="skill">Teamwork</span>
+                <div class="skills">
+                    <span class="skill">Creatività</span>
+                    <span class="skill">Design</span>
                     <span class="skill">Precisione</span>
-                </div>
-                
-                <div class="toggle-section">
-                    <div class="toggle-header">
-                        <h4><i class="fas fa-cogs"></i> Mansioni principali</h4>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
-                    </div>
-                    <div class="toggle-content">
-                        <ul class="activity-list">
-                            <li>Assemblaggio di alimentatori e componenti elettronici</li>
-                            <li>Test a bassa potenza su schede elettroniche</li>
-                            <li>Collaudo finale dei dispositivi</li>
-                            <li>Controllo qualità preliminare</li>
-                        </ul>
-                        
-                        <div class="testimonial">
-                            <div class="testimonial-content">
-                                "Vincenzo ha dimostrato grande attenzione nella fase di assemblaggio e curiosità nell'apprendere i processi produttivi. Si è integrato bene nel team di lavoro."
-                            </div>
-                            <div class="testimonial-author">- Mirco, Tutor aziendale</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="toggle-section">
-                    <div class="toggle-header">
-                        <h4><i class="fas fa-chart-line"></i> Crescita personale</h4>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
-                    </div>
-                    <div class="toggle-content">
-                        <p>Questa esperienza mi ha aiutato a superare la timidezza iniziale e a lavorare in team con persone di diverse età ed esperienze. Ho imparato l'importanza della precisione nel lavoro manuale e della comunicazione efficace in ambito tecnico.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="slide-image">
-                <div class="image-card">
-                    <!-- SOSTITUIRE CON LA PROPRIA IMMAGINE -->
-                    <img src="img/imgJMA.jpg" alt="Esperienza JMA Teko">
+                    <span class="skill">Attenzione ai dettagli</span>
+                    <span class="skill">Comunicazione visiva</span>
                 </div>
             </div>
         </div>
-    </section>
-    
-    <!-- Slide 3: Quinto Anno -->
-    <section class="slide" id="slide3">
-        <img src="img/bgFATA.png" alt="Background" class="slide-bg">
-        <div class="slide-content">
-            <div class="slide-text">
-                <span class="slide-number">03</span>
-                <h2 class="slide-title">Informatica Aziendale</h2>
-                <span class="company"><i class="fas fa-server"></i> Euroricambi - CED</span>
-                <p class="slide-description">Gestione delle infrastrutture IT in un'azienda internazionale, tra configurazioni hardware e sviluppo software.</p>
+        
+        <div class="year-marker">2024</div>
+        
+        <div class="experience">
+            <div class="experience-content">
+                <h2>JMA Teko</h2>
+                <h3>Produzione componenti wireless</h3>
                 
-                <div class="skills-container">
-                    <span class="skill">Programmazione</span>
-                    <span class="skill">Reti aziendali</span>
-                    <span class="skill">Problem solving</span>
+                <!-- Immagine aggiunta -->
+                <img src="jma.jpg" 
+                     alt="Produzione componenti JMA Teko" 
+                     class="experience-image"
+                     onclick="openModal(this)">
+                
+                <p>Esperienza presso JMA Teko, azienda specializzata nella produzione di componenti e dispositivi wireless.</p>
+                
+                <ul>
+                    <li>Assemblaggio di alimentatori e componenti</li>
+                    <li>Test a bassa potenza su schede elettroniche</li>
+                    <li>Collaudo finale dei dispositivi</li>
+                    <li>Lavoro nei reparti di assemblaggio e collaudo</li>
+                </ul>
+                
+                <p><strong>Come ho vissuto l'esperienza:</strong> Mi sono sentito a mio agio, ho lavorato in autonomia e ho migliorato le mie capacità relazionali.</p>
+                
+                <div class="skills">
+                    <span class="skill">Lavoro di squadra</span>
+                    <span class="skill">Precisione</span>
+                    <span class="skill">Comunicazione</span>
+                    <span class="skill">Organizzazione</span>
+                    <span class="skill">Elettronica</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="experience">
+            <div class="experience-content">
+                <h2>Euroricambi</h2>
+                <h3>Reparto CED (Informatica)</h3>
+                
+                <!-- Immagine aggiunta -->
+                <img src="euroricambi.jpg" 
+                     alt="Reparto informatico Euroricambi" 
+                     class="experience-image"
+                     onclick="openModal(this)">
+                
+                <p>Esperienza formativa presso Euroricambi, nel reparto Centro Elaborazione Dati, con visite anche ad altri reparti.</p>
+                
+                <ul>
+                    <li>Configurazione completa di computer aziendali</li>
+                    <li>Installazione di Windows e software necessari</li>
+                    <li>Trasferimento di postazioni di lavoro</li>
+                    <li>Risoluzione di problemi tecnici</li>
+                    <li>Studio autonomo di linguaggi di programmazione</li>
+                </ul>
+                
+                <div class="skills">
+                    <span class="skill">Informatica</span>
+                    <span class="skill">Problem Solving</span>
                     <span class="skill">Autonomia</span>
-                </div>
-                
-                <div class="toggle-section">
-                    <div class="toggle-header">
-                        <h4><i class="fas fa-laptop-code"></i> Progetti realizzati</h4>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
-                    </div>
-                    <div class="toggle-content">
-                        <ul class="activity-list">
-                            <li>Configurazione completa di PC aziendali (Windows, software, reti)</li>
-                            <li>Trasferimento e setup di postazioni di lavoro</li>
-                            <li>Risoluzione problemi tecnici di base</li>
-                            <li>Studio autonomo di linguaggi di programmazione</li>
-                        </ul>
-                        
-                        <div class="testimonial">
-                            <div class="testimonial-content">
-                                "Abbiamo apprezzato la rapidità con cui Vincenzo ha appreso le procedure e la sua autonomia nel portare a termine i compiti assegnati. Mostra buone potenzialità nel campo informatico."
-                            </div>
-                            <div class="testimonial-author">- Davide, Collega CED</div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="toggle-section">
-                    <div class="toggle-header">
-                        <h4><i class="fas fa-user-astronaut"></i> Scoperte personali</h4>
-                        <i class="fas fa-chevron-down toggle-icon"></i>
-                    </div>
-                    <div class="toggle-content">
-                        <p>Ho scoperto di essere più intraprendente e capace di lavorare in autonomia di quanto pensassi. L'esperienza mi ha confermato l'interesse per l'informatica e dato una visione concreta del mondo del lavoro in questo settore.</p>
-                    </div>
+                    <span class="skill">Gestione del tempo</span>
+                    <span class="skill">Coding</span>
+                    <span class="skill">Reti</span>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Sezione competenze -->
+    <div class="skills-section">
+        <h2>Competenze Acquisite</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h3>Creatività</h3>
+                <p>Sviluppata durante l'esperienza al MAST nel design del packaging</p>
+            </div>
             
-            <div class="slide-image">
-                <div class="image-card">
-                    <!-- SOSTITUIRE CON LA PROPRIA IMMAGINE -->
-                    <img src="img/imgFATA.jpg" alt="Esperienza Euroricambi">
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h3>Tecnologia</h3>
+                <p>Competenze tecniche acquisite in JMA Teko con componenti elettronici</p>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-laptop-code"></i>
+                </div>
+                <h3>Programmazione</h3>
+                <p>Migliorate durante l'esperienza nel reparto informatico di Euroricambi</p>
+            </div>
+            
+            <div class="skill-card">
+                <div class="skill-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Teamwork</h3>
+                <p>Lavoro di squadra in tutte e tre le esperienze aziendali</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sezione citazione -->
+    <div class="quote-section">
+        <div class="quote">
+            "Queste esperienze PCTO mi hanno permesso di mettermi alla prova in contesti reali, acquisendo competenze tecniche e trasversali che saranno fondamentali per il mio futuro."
+        </div>
+        <div class="quote-author">Vincenzo Castelletti</div>
+    </div>
+
+    <!-- Sezione aziende migliorata con immagini reali -->
+    <section class="companies">
+        <div class="company-card">
+            <div class="company-inner">
+                <div class="company-front">
+                    <div class="company-logo">
+                        <img src="mast.png" alt="MAST Bologna">
+                    </div>
+                    <h3>MAST Bologna</h3>
+                    <p>Design del Packaging</p>
+                    <p>Novembre - Dicembre 2022</p>
+                </div>
+                <div class="company-back">
+                    <h3>Cosa ho imparato</h3>
+                    <ul>
+                        <li>Processo creativo del packaging</li>
+                        <li>Scelta dei materiali</li>
+                        <li>Comunicazione visiva</li>
+                        <li>Importanza del design</li>
+                        <li>Lavoro di precisione</li>
+                    </ul>
+                    <a href="#mast-experience" class="company-link">Vedi esperienza</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="company-card">
+            <div class="company-inner">
+                <div class="company-front">
+                    <div class="company-logo">
+                        <img src="jma.jpg" alt="JMA Teko">
+                    </div>
+                    <h3>JMA Teko</h3>
+                    <p>Produzione wireless</p>
+                    <p>Maggio - Giugno 2024</p>
+                </div>
+                <div class="company-back">
+                    <h3>Cosa ho imparato</h3>
+                    <ul>
+                        <li>Assemblaggio componenti</li>
+                        <li>Test elettronici</li>
+                        <li>Collaudo finale</li>
+                        <li>Lavoro di squadra</li>
+                        <li>Organizzazione aziendale</li>
+                    </ul>
+                    <a href="#jma-experience" class="company-link">Vedi esperienza</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="company-card">
+            <div class="company-inner">
+                <div class="company-front">
+                    <div class="company-logo">
+                        <img src="euroricambi.jpg" alt="Euroricambi">
+                    </div>
+                    <h3>Euroricambi</h3>
+                    <p>Reparto informatico</p>
+                    <p>Novembre - Dicembre 2024</p>
+                </div>
+                <div class="company-back">
+                    <h3>Cosa ho imparato</h3>
+                    <ul>
+                        <li>Configurazione PC</li>
+                        <li>Installazione software</li>
+                        <li>Problem solving</li>
+                        <li>Linguaggi di programmazione</li>
+                        <li>Gestione reti</li>
+                    </ul>
+                    <a href="#euroricambi-experience" class="company-link">Vedi esperienza</a>
                 </div>
             </div>
         </div>
     </section>
-    
+
+    <!-- Modal per immagini -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <footer>
+        <h2>Grazie per aver visto il mio percorso</h2>
+        <p>Queste esperienze PCTO mi hanno permesso di crescere professionalmente e personalmente, acquisendo competenze tecniche e trasversali che porterò con me nel mio futuro.</p>
+        
+        <div class="social-links">
+            <a href="https://github.com/kkcaste" class="social-link"><i class="fab fa-github"></i></a>
+            <a href="https://www.instagram.com/kkcaste/" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:vincenzocastelletti06@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+        </div>
+        
+        <div class="signature">Vincenzo Castelletti</div>
+    </footer>
+
     <script>
-        // Slide navigation
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        const prevBtn = document.getElementById('prev-btn');
-        const nextBtn = document.getElementById('next-btn');
-        let currentSlide = 0;
-        
-        // Initialize
-        function showSlide(index) {
-            slides.forEach((slide, i) => {
-                if (i === index) {
-                    slide.classList.add('active');
-                    dots[i].classList.add('active');
-                } else {
-                    slide.classList.remove('active');
-                    dots[i].classList.remove('active');
-                }
+        // Animazione timeline al scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const experiences = document.querySelectorAll('.experience');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
             });
             
-            // Scroll to slide
-            slides[index].scrollIntoView({ behavior: 'smooth' });
-        }
-        
-        function goToSlide(index) {
-            if (index < 0) index = slides.length - 1;
-            if (index >= slides.length) index = 0;
+            experiences.forEach(exp => {
+                observer.observe(exp);
+            });
             
-            currentSlide = index;
-            showSlide(currentSlide);
+            // Effetto parallax per l'hero
+            window.addEventListener('scroll', function() {
+                const hero = document.querySelector('.hero');
+                const scrollPosition = window.pageYOffset;
+                hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
+            });
+        });
+        
+        // Modal per immagini
+        function openModal(img) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImage");
+            modal.style.display = "block";
+            modalImg.src = img.src;
         }
         
-        // Event listeners
-        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
-        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
         
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                currentSlide = index;
-                showSlide(currentSlide);
+        // Chiudi modal cliccando fuori dall'immagine
+        window.onclick = function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        
+        // Smooth scroll per i link
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
             });
         });
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') goToSlide(currentSlide - 1);
-            if (e.key === 'ArrowRight') goToSlide(currentSlide + 1);
-        });
-        
-        // Toggle sections
-        document.querySelectorAll('.toggle-header').forEach(header => {
-            header.addEventListener('click', () => {
-                header.classList.toggle('active');
-            });
-        });
-        
-        // Intersection Observer for slide activation
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const index = Array.from(slides).indexOf(entry.target);
-                    currentSlide = index;
-                    showSlide(currentSlide);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        slides.forEach(slide => {
-            observer.observe(slide);
-        });
-        
-        // Initial slide
-        showSlide(0);
     </script>
 </body>
 </html>
