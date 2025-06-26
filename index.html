@@ -6,16 +6,18 @@
     <title>Il Mio Percorso PCTO | Vincenzo Castelletti</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Open+Sans:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #ff4d4d;
-            --secondary: #4d79ff;
-            --tertiary: #4dffb8;
-            --dark: #222;
-            --light: #f8f8f8;
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --secondary: #f72585;
+            --accent: #4cc9f0;
+            --dark: #14213d;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --success: #38b000;
         }
         
         * {
@@ -25,1018 +27,734 @@
         }
         
         body {
-            font-family: 'Open Sans', sans-serif;
-            background-color: var(--light);
-            color: var(--dark);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        
-        h1, h2, h3 {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 900;
-            text-transform: uppercase;
+            line-height: 1.7;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
         }
         
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
             padding: 0 2rem;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
+        }
+        
+        /* HEADER CON ANIMAZIONE */
+        .header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
             color: white;
+            padding: 6rem 0;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             position: relative;
             overflow: hidden;
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
         }
         
-        .hero h1 {
-            font-size: 5rem;
-            margin-bottom: 1rem;
-            z-index: 2;
-            text-shadow: 3px 3px 0 rgba(0,0,0,0.2);
-            animation: fadeIn 1s ease-out;
-            line-height: 1.1;
-        }
-        
-        .hero p {
-            font-size: 1.5rem;
-            max-width: 800px;
-            z-index: 2;
-            animation: fadeIn 1s ease-out 0.3s both;
-            margin-bottom: 2rem;
-        }
-        
-        .hero::after {
+        .header::before {
             content: '';
             position: absolute;
-            width: 300%;
-            height: 300%;
-            top: -100%;
-            left: -100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="white" fill-opacity="0.05" points="50,0 100,0 50,100 0,100"/></svg>');
-            background-size: 50px 50px;
-            animation: moveBg 30s linear infinite;
-            z-index: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="rgba(255,255,255,0.03)" points="0,100 100,0 100,100"/></svg>');
+            background-size: cover;
+            opacity: 0.5;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            animation: fadeInUp 1s ease-out both;
+        }
+        
+        .header h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.8rem;
+            font-weight: 300;
+            margin: 0 auto 2.5rem;
+            opacity: 0.9;
+            animation: fadeIn 1.5s ease-out 0.3s both;
         }
         
         .scroll-down {
             position: absolute;
-            bottom: 30px;
+            bottom: 2rem;
             left: 50%;
             transform: translateX(-50%);
             color: white;
             font-size: 2rem;
             animation: bounce 2s infinite;
-            z-index: 2;
-            cursor: pointer;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-            40% { transform: translateY(-20px) translateX(-50%); }
-            60% { transform: translateY(-10px) translateX(-50%); }
-        }
-        
-        @keyframes moveBg {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .timeline {
-            position: relative;
-            max-width: 1200px;
-            margin: 5rem auto;
-            padding: 0 2rem;
-        }
-        
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 6px;
-            background: linear-gradient(to bottom, var(--primary), var(--secondary));
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -3px;
-            border-radius: 3px;
-        }
-        
-        .experience {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
             opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.5s ease;
+            animation: fadeIn 1s ease-out 1s both, bounce 2s infinite 1.5s;
         }
         
-        .experience.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
-        .experience:nth-child(odd) {
-            left: 0;
-        }
-        
-        .experience:nth-child(even) {
-            left: 50%;
-        }
-        
-        .experience::after {
-            content: '';
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            right: -20px;
+        /* SEZIONE ESPERIENZE CON ANIMAZIONI */
+        .experiences {
+            padding: 8rem 0;
             background-color: white;
-            border: 5px solid var(--secondary);
-            top: 15px;
-            border-radius: 50%;
-            z-index: 1;
-            box-shadow: var(--shadow);
         }
         
-        .experience:nth-child(even)::after {
-            left: -20px;
-        }
-        
-        .experience-content {
-            padding: 2rem;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            position: relative;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        
-        .experience-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-        }
-        
-        .experience-content::before {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            top: 20px;
-        }
-        
-        .experience:nth-child(odd) .experience-content::before {
-            border-width: 10px 0 10px 10px;
-            border-color: transparent transparent transparent white;
-            right: -10px;
-        }
-        
-        .experience:nth-child(even) .experience-content::before {
-            border-width: 10px 10px 10px 0;
-            border-color: transparent white transparent transparent;
-            left: -10px;
-        }
-        
-        .experience h2 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
-            font-size: 2rem;
+        .section-title {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 6rem;
             position: relative;
             display: inline-block;
-        }
-        
-        .experience h2::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: linear-gradient(to right, var(--primary), var(--tertiary));
-        }
-        
-        .experience h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        
-        .experience p, .experience ul {
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-        
-        .experience ul {
-            padding-left: 1.5rem;
-        }
-        
-        .experience li {
-            margin-bottom: 0.5rem;
-            position: relative;
-        }
-        
-        .experience li::before {
-            content: '•';
-            color: var(--primary);
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-        }
-        
-        .skills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .skill {
-            background-color: var(--tertiary);
-            color: var(--dark);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        .skill:hover {
-            transform: scale(1.05);
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        .year-marker {
-            position: absolute;
-            top: -30px;
             left: 50%;
             transform: translateX(-50%);
-            background-color: var(--dark);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 30px;
-            font-weight: bold;
-            z-index: 2;
-            box-shadow: var(--shadow);
-            font-size: 1.2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+        
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+        
+        .experience-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            border: 1px solid rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out, box-shadow 0.3s ease;
+        }
+        
+        .experience-card:nth-child(1) { transition-delay: 0.2s; }
+        .experience-card:nth-child(2) { transition-delay: 0.4s; }
+        .experience-card:nth-child(3) { transition-delay: 0.6s; }
+        
+        .experience-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .experience-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.12);
         }
         
         .experience-image {
             width: 100%;
-            height: 200px;
-            border-radius: 10px;
+            height: 280px;
             object-fit: cover;
-            margin: 1rem 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-            cursor: pointer;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
-        .experience-image:hover {
-            transform: scale(1.02);
+        .experience-card:hover .experience-image {
+            transform: scale(1.05);
         }
         
-        /* Modal per immagini */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.9);
-            overflow: auto;
+        .experience-content {
+            padding: 2.5rem;
+            position: relative;
         }
         
-        .modal-content {
-            margin: auto;
-            display: block;
-            max-width: 90%;
-            max-height: 90%;
-            margin-top: 5vh;
-            animation: zoom 0.3s;
-        }
-        
-        @keyframes zoom {
-            from { transform: scale(0); }
-            to { transform: scale(1); }
-        }
-        
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
+        .experience-year {
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
             color: white;
-            font-size: 40px;
-            font-weight: bold;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-        
-        .close:hover {
-            color: var(--tertiary);
-        }
-        
-        /* Sezione aziende migliorata */
-        .companies {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 3rem;
-            margin: 8rem auto;
-            max-width: 1400px;
-            padding: 0 2rem;
-        }
-        
-        .company-card {
-            width: 350px;
-            height: 450px;
-            perspective: 1000px;
-            position: relative;
-        }
-        
-        .company-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s;
-            transform-style: preserve-3d;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-        }
-        
-        .company-card:hover .company-inner {
-            transform: rotateY(180deg);
-        }
-        
-        .company-front, .company-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-        
-        .company-front {
-            background-color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            text-align: center;
-        }
-        
-        .company-logo {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            margin-bottom: 1.5rem;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            border: 5px solid white;
-            position: relative;
-        }
-        
-        .company-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .company-logo::after {
-            content: 'Clicca per scoprire di più';
-            position: absolute;
-            bottom: -30px;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            color: var(--primary);
-            font-weight: bold;
-            font-size: 0.9rem;
-            opacity: 0;
-            transition: all 0.3s;
-        }
-        
-        .company-card:hover .company-logo::after {
-            opacity: 1;
-            bottom: -25px;
-        }
-        
-        .company-back {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            color: white;
-            transform: rotateY(180deg);
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-        }
-        
-        .company-back h3 {
-            color: white;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-        
-        .company-back ul {
-            list-style-type: none;
-            margin-bottom: 2rem;
-        }
-        
-        .company-back li {
-            margin-bottom: 0.8rem;
-            position: relative;
-            padding-left: 1.5rem;
-            text-align: left;
-        }
-        
-        .company-back li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--tertiary);
-            font-weight: bold;
-        }
-        
-        .company-link {
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
             display: inline-block;
-            margin-top: auto;
-            padding: 0.8rem 1.5rem;
-            background-color: white;
-            color: var(--secondary);
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
+            margin-bottom: 1.5rem;
+            position: absolute;
+            top: -1.5rem;
+            left: 2.5rem;
+            box-shadow: 0 4px 12px rgba(244, 67, 54, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
-        .company-link:hover {
-            background-color: var(--tertiary);
-            color: var(--dark);
+        .experience-card:hover .experience-year {
             transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(244, 67, 54, 0.4);
         }
         
-        /* Sezione citazione */
-        .quote-section {
-            background: linear-gradient(135deg, var(--tertiary), var(--secondary));
-            padding: 5rem 2rem;
-            text-align: center;
+        .experience-title {
+            font-size: 2.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--dark);
+            padding-top: 1rem;
+            transition: color 0.3s ease;
+        }
+        
+        .experience-card:hover .experience-title {
+            color: var(--primary);
+        }
+        
+        .experience-company {
+            font-size: 1.4rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .experience-company i {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .experience-card:hover .experience-company i {
+            transform: rotate(10deg);
+        }
+        
+        .experience-description {
+            font-size: 1.15rem;
+            margin-bottom: 1.8rem;
+            color: var(--gray);
+            line-height: 1.8;
+        }
+        
+        .experience-list {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+        
+        .experience-list li {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--dark);
+            transition: transform 0.3s ease;
+        }
+        
+        .experience-list li:hover {
+            transform: translateX(5px);
+        }
+        
+        .experience-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .experience-list li:hover::before {
+            transform: translateX(3px);
+        }
+        
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        
+        .skill-tag {
+            background: rgba(67, 97, 238, 0.1);
+            color: var(--primary);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(67, 97, 238, 0.3);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .skill-tag:hover {
+            background: var(--primary);
             color: white;
-            clip-path: polygon(0 10%, 100% 0, 100% 90%, 0 100%);
-            margin: 5rem 0;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
         }
         
-        .quote {
+        /* SEZIONE COMPETENZE CON ANIMAZIONI */
+        .skills-section {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skills-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(67,97,238,0.03)" d="M0,0 L100,0 L100,100 Q50,80 0,100 Z"/></svg>');
+            background-size: cover;
+            opacity: 0.8;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .skill-card {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: white;
+            border-radius: 16px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .skill-card:nth-child(1) { transition-delay: 0.2s; }
+        .skill-card:nth-child(2) { transition-delay: 0.4s; }
+        .skill-card:nth-child(3) { transition-delay: 0.6s; }
+        .skill-card:nth-child(4) { transition-delay: 0.8s; }
+        
+        .skill-card.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+        
+        .skill-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            transition: transform 0.5s ease;
+        }
+        
+        .skill-card:hover .skill-icon {
+            transform: rotate(15deg) scale(1.1);
+        }
+        
+        .skill-title {
+            font-size: 1.6rem;
+            margin-bottom: 1.2rem;
+            color: var(--dark);
+            transition: color 0.3s ease;
+        }
+        
+        .skill-card:hover .skill-title {
+            color: var(--primary);
+        }
+        
+        .skill-description {
+            font-size: 1.1rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+        
+        /* CONCLUSIONE CON ANIMAZIONE */
+        .conclusion {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: white;
+            padding: 8rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .conclusion::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path fill="rgba(255,255,255,0.03)" d="M0,100 L50,0 L100,100 Z"/></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .conclusion-content {
+            position: relative;
+            z-index: 2;
             max-width: 800px;
             margin: 0 auto;
-            font-size: 1.8rem;
-            font-family: 'Playfair Display', serif;
-            font-style: italic;
-            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
         
-        .quote::before, .quote::after {
-            content: '"';
-            font-size: 4rem;
-            color: rgba(255,255,255,0.2);
-            position: absolute;
+        .conclusion-content.animate {
+            opacity: 1;
+            transform: translateY(0);
         }
         
-        .quote::before {
-            top: -30px;
-            left: -40px;
-        }
-        
-        .quote::after {
-            bottom: -60px;
-            right: -40px;
-        }
-        
-        .quote-author {
-            margin-top: 2rem;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        /* Footer migliorato */
-        footer {
-            background-color: var(--dark);
-            color: white;
-            text-align: center;
-            padding: 5rem 2rem;
-            margin-top: 5rem;
-            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
-            position: relative;
-        }
-        
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon fill="white" fill-opacity="0.03" points="0,100 100,0 100,100"/></svg>');
-            background-size: 50px 50px;
-        }
-        
-        footer h2 {
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        footer h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 3px;
-            background-color: var(--tertiary);
-        }
-        
-        footer p {
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            font-size: 1.1rem;
+        .conclusion-text {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin: 0 auto 3rem;
+            line-height: 1.6;
         }
         
         .signature {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
-            color: var(--tertiary);
-            margin-top: 2rem;
+            font-weight: 700;
+            margin-top: 3rem;
             position: relative;
+            display: inline-block;
+            opacity: 0;
+            transition: opacity 0.8s ease-out 0.3s;
         }
         
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 2rem;
+        .signature.animate {
+            opacity: 1;
         }
         
-        .social-link {
-            color: white;
-            font-size: 1.5rem;
-            transition: all 0.3s;
-        }
-        
-        .social-link:hover {
-            color: var(--tertiary);
-            transform: translateY(-3px);
-        }
-        
-        /* Responsive design */
-        @media screen and (max-width: 768px) {
-            .timeline::after {
-                left: 31px;
-            }
-            
-            .experience {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .experience:nth-child(even) {
-                left: 0;
-            }
-            
-            .experience::after {
-                left: 18px !important;
-            }
-            
-            .experience:nth-child(odd) .experience-content::before {
-                border-width: 10px 10px 10px 0;
-                border-color: transparent white transparent transparent;
-                left: -10px;
-                right: auto;
-            }
-            
-            .hero h1 {
-                font-size: 3rem;
-            }
-            
-            .hero p {
-                font-size: 1.2rem;
-            }
-            
-            .company-card {
-                width: 300px;
-                height: 400px;
-            }
-            
-            .quote {
-                font-size: 1.4rem;
-            }
-        }
-        
-        /* Animazioni speciali */
-        .floating {
-            animation: floating 3s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .glow {
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-        
-        @keyframes glow {
-            from { text-shadow: 0 0 5px white; }
-            to { text-shadow: 0 0 15px white, 0 0 20px var(--tertiary); }
-        }
-        
-        /* Sezione competenze */
-        .skills-section {
-            max-width: 1200px;
-            margin: 5rem auto;
-            padding: 0 2rem;
-        }
-        
-        .skills-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--dark);
-            position: relative;
-        }
-        
-        .skills-section h2::after {
+        .signature::after {
             content: '';
             position: absolute;
             bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, white, transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.8s ease-out 0.5s;
         }
         
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 2rem;
+        .signature.animate::after {
+            transform: scaleX(1);
         }
         
-        .skill-card {
-            background-color: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            transition: all 0.3s;
-            text-align: center;
+        /* ANIMAZIONI */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         
-        .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
-        .skill-icon {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-20px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-10px) translateX(-50%);
+            }
         }
         
-        .skill-card h3 {
-            color: var(--secondary);
-            margin-bottom: 1rem;
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .header {
+                min-height: 80vh;
+                padding: 4rem 0;
+            }
+            
+            .header h1 {
+                font-size: 2.8rem;
+            }
+            
+            .header p {
+                font-size: 1.3rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 4rem;
+            }
+            
+            .experience-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .experience-title {
+                font-size: 1.8rem;
+            }
+            
+            .experience-company {
+                font-size: 1.2rem;
+            }
+            
+            .experience-description {
+                font-size: 1.05rem;
+            }
+            
+            .conclusion-text {
+                font-size: 1.6rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .experience-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .experience-year {
+                left: 1.5rem;
+            }
+            
+            .conclusion-text {
+                font-size: 1.4rem;
+            }
         }
     </style>
 </head>
 <body>
-    <section class="hero">
-        <h1 class="floating">Il Mio Viaggio PCTO</h1>
-        <p class="pulse">Dalla teoria alla pratica: tre esperienze che hanno plasmato la mia crescita professionale e personale</p>
-        <div class="scroll-down glow" onclick="document.querySelector('.timeline').scrollIntoView({ behavior: 'smooth' })">
-            <i class="fas fa-chevron-down"></i>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <h1>Il Mio Percorso PCTO</h1>
+            <p>Un viaggio attraverso esperienze formative che hanno plasmato la mia crescita professionale</p>
+            <div class="scroll-down">
+                <i class="fas fa-chevron-down"></i>
+            </div>
         </div>
-    </section>
+    </header>
 
-    <div class="timeline">
-        <div class="year-marker">2022</div>
-        
-        <div class="experience">
-            <div class="experience-content">
-                <h2>MAST Bologna</h2>
-                <h3>Design del Packaging</h3>
-                
-                <!-- Immagine aggiunta -->
-                <img src="mast.png" 
-                     alt="Design packaging MAST" 
-                     class="experience-image"
-                     onclick="openModal(this)">
-                
-                <p>Durante il mio percorso PCTO di terza superiore ho svolto un'esperienza formativa presso il MAST di Bologna, focalizzata sul processo di creazione del packaging.</p>
-                
-                <ul>
-                    <li>Conoscenza delle diverse fasi di realizzazione di un imballaggio</li>
-                    <li>Dall'ideazione grafica alla scelta dei materiali</li>
-                    <li>Importanza del design e della funzionalità</li>
-                    <li>Ruolo fondamentale della comunicazione visiva</li>
-                </ul>
-                
-                <div class="skills">
-                    <span class="skill">Creatività</span>
-                    <span class="skill">Design</span>
-                    <span class="skill">Precisione</span>
-                    <span class="skill">Attenzione ai dettagli</span>
-                    <span class="skill">Comunicazione visiva</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="year-marker">2024</div>
-        
-        <div class="experience">
-            <div class="experience-content">
-                <h2>JMA Teko</h2>
-                <h3>Produzione componenti wireless</h3>
-                
-                <!-- Immagine aggiunta -->
-                <img src="jma.jpg" 
-                     alt="Produzione componenti JMA Teko" 
-                     class="experience-image"
-                     onclick="openModal(this)">
-                
-                <p>Esperienza presso JMA Teko, azienda specializzata nella produzione di componenti e dispositivi wireless.</p>
-                
-                <ul>
-                    <li>Assemblaggio di alimentatori e componenti</li>
-                    <li>Test a bassa potenza su schede elettroniche</li>
-                    <li>Collaudo finale dei dispositivi</li>
-                    <li>Lavoro nei reparti di assemblaggio e collaudo</li>
-                </ul>
-                
-                <p><strong>Come ho vissuto l'esperienza:</strong> Mi sono sentito a mio agio, ho lavorato in autonomia e ho migliorato le mie capacità relazionali.</p>
-                
-                <div class="skills">
-                    <span class="skill">Lavoro di squadra</span>
-                    <span class="skill">Precisione</span>
-                    <span class="skill">Comunicazione</span>
-                    <span class="skill">Organizzazione</span>
-                    <span class="skill">Elettronica</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="experience">
-            <div class="experience-content">
-                <h2>Euroricambi</h2>
-                <h3>Reparto CED (Informatica)</h3>
-                
-                <!-- Immagine aggiunta -->
-                <img src="euroricambi.jpg" 
-                     alt="Reparto informatico Euroricambi" 
-                     class="experience-image"
-                     onclick="openModal(this)">
-                
-                <p>Esperienza formativa presso Euroricambi, nel reparto Centro Elaborazione Dati, con visite anche ad altri reparti.</p>
-                
-                <ul>
-                    <li>Configurazione completa di computer aziendali</li>
-                    <li>Installazione di Windows e software necessari</li>
-                    <li>Trasferimento di postazioni di lavoro</li>
-                    <li>Risoluzione di problemi tecnici</li>
-                    <li>Studio autonomo di linguaggi di programmazione</li>
-                </ul>
-                
-                <div class="skills">
-                    <span class="skill">Informatica</span>
-                    <span class="skill">Problem Solving</span>
-                    <span class="skill">Autonomia</span>
-                    <span class="skill">Gestione del tempo</span>
-                    <span class="skill">Coding</span>
-                    <span class="skill">Reti</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sezione competenze -->
-    <div class="skills-section">
-        <h2>Competenze Acquisite</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <div class="skill-icon">
-                    <i class="fas fa-lightbulb"></i>
-                </div>
-                <h3>Creatività</h3>
-                <p>Sviluppata durante l'esperienza al MAST nel design del packaging</p>
-            </div>
+    <!-- ESPERIENZE -->
+    <section class="experiences">
+        <div class="container">
+            <h2 class="section-title">Le Mie Esperienze</h2>
             
-            <div class="skill-card">
-                <div class="skill-icon">
-                    <i class="fas fa-microchip"></i>
+            <div class="experience-grid">
+                <!-- MAST -->
+                <div class="experience-card">
+                    <img src="mast.png" alt="MAST Bologna" class="experience-image">
+                    <div class="experience-content">
+                        <span class="experience-year">2022</span>
+                        <h3 class="experience-title">Design del Packaging</h3>
+                        <h4 class="experience-company"><i class="fas fa-palette"></i> MAST Bologna</h4>
+                        <p class="experience-description">
+                            La mia prima esperienza PCTO mi ha introdotto al mondo del design industriale, mostrandomi il processo creativo completo dalla concezione alla realizzazione pratica del packaging.
+                        </p>
+                        <ul class="experience-list">
+                            <li>Studio approfondito delle fasi di creazione dell'imballaggio</li>
+                            <li>Dall'ideazione grafica alla selezione dei materiali più appropriati</li>
+                            <li>Approfondimento sull'importanza del design e della funzionalità</li>
+                            <li>Principi di comunicazione visiva efficace</li>
+                            <li>Lavoro di gruppo e presentazione dei progetti</li>
+                        </ul>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Creatività</span>
+                            <span class="skill-tag">Design Thinking</span>
+                            <span class="skill-tag">Precisione</span>
+                            <span class="skill-tag">Teamwork</span>
+                        </div>
+                    </div>
                 </div>
-                <h3>Tecnologia</h3>
-                <p>Competenze tecniche acquisite in JMA Teko con componenti elettronici</p>
-            </div>
-            
-            <div class="skill-card">
-                <div class="skill-icon">
-                    <i class="fas fa-laptop-code"></i>
-                </div>
-                <h3>Programmazione</h3>
-                <p>Migliorate durante l'esperienza nel reparto informatico di Euroricambi</p>
-            </div>
-            
-            <div class="skill-card">
-                <div class="skill-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <h3>Teamwork</h3>
-                <p>Lavoro di squadra in tutte e tre le esperienze aziendali</p>
-            </div>
-        </div>
-    </div>
 
-    <!-- Sezione citazione -->
-    <div class="quote-section">
-        <div class="quote">
-            "Queste esperienze PCTO mi hanno permesso di mettermi alla prova in contesti reali, acquisendo competenze tecniche e trasversali che saranno fondamentali per il mio futuro."
-        </div>
-        <div class="quote-author">Vincenzo Castelletti</div>
-    </div>
+                <!-- JMA TEKO -->
+                <div class="experience-card">
+                    <img src="jma.jpg" alt="JMA Teko" class="experience-image">
+                    <div class="experience-content">
+                        <span class="experience-year">2024</span>
+                        <h3 class="experience-title">Produzione Wireless</h3>
+                        <h4 class="experience-company"><i class="fas fa-bolt"></i> JMA Teko</h4>
+                        <p class="experience-description">
+                            Un'immersione nel mondo della produzione tecnologica, dove ho potuto apprendere i processi di assemblaggio e controllo qualità nel settore delle telecomunicazioni wireless.
+                        </p>
+                        <ul class="experience-list">
+                            <li>Assemblaggio di alimentatori e componenti elettronici</li>
+                            <li>Test a bassa potenza su schede elettroniche</li>
+                            <li>Collaudo finale dei dispositivi</li>
+                            <li>Lavoro autonomo nei reparti specializzati</li>
+                            <li>Gestione della documentazione tecnica</li>
+                        </ul>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Elettronica</span>
+                            <span class="skill-tag">Teamwork</span>
+                            <span class="skill-tag">Organizzazione</span>
+                            <span class="skill-tag">Problem Solving</span>
+                        </div>
+                    </div>
+                </div>
 
-    <!-- Sezione aziende migliorata con immagini reali -->
-    <section class="companies">
-        <div class="company-card">
-            <div class="company-inner">
-                <div class="company-front">
-                    <div class="company-logo">
-                        <img src="mast.png" alt="MAST Bologna">
+                <!-- EURORICAMBI -->
+                <div class="experience-card">
+                    <img src="euroricambi.jpg" alt="Euroricambi" class="experience-image">
+                    <div class="experience-content">
+                        <span class="experience-year">2024</span>
+                        <h3 class="experience-title">Reparto Informatico</h3>
+                        <h4 class="experience-company"><i class="fas fa-laptop-code"></i> Euroricambi</h4>
+                        <p class="experience-description">
+                            Esperienza nel cuore del reparto informatico aziendale, con attività pratiche di configurazione e manutenzione, oltre all'approfondimento autonomo della programmazione.
+                        </p>
+                        <ul class="experience-list">
+                            <li>Configurazione completa di computer aziendali</li>
+                            <li>Installazione sistemi operativi e software</li>
+                            <li>Risoluzione problemi tecnici e assistenza</li>
+                            <li>Studio autonomo di linguaggi di programmazione</li>
+                            <li>Analisi delle esigenze informatiche aziendali</li>
+                        </ul>
+                        <div class="skills-tags">
+                            <span class="skill-tag">Informatica</span>
+                            <span class="skill-tag">Programmazione</span>
+                            <span class="skill-tag">Problem Solving</span>
+                            <span class="skill-tag">Autonomia</span>
+                        </div>
                     </div>
-                    <h3>MAST Bologna</h3>
-                    <p>Design del Packaging</p>
-                    <p>Novembre - Dicembre 2022</p>
-                </div>
-                <div class="company-back">
-                    <h3>Cosa ho imparato</h3>
-                    <ul>
-                        <li>Processo creativo del packaging</li>
-                        <li>Scelta dei materiali</li>
-                        <li>Comunicazione visiva</li>
-                        <li>Importanza del design</li>
-                        <li>Lavoro di precisione</li>
-                    </ul>
-                    <a href="#mast-experience" class="company-link">Vedi esperienza</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="company-card">
-            <div class="company-inner">
-                <div class="company-front">
-                    <div class="company-logo">
-                        <img src="jma.jpg" alt="JMA Teko">
-                    </div>
-                    <h3>JMA Teko</h3>
-                    <p>Produzione wireless</p>
-                    <p>Maggio - Giugno 2024</p>
-                </div>
-                <div class="company-back">
-                    <h3>Cosa ho imparato</h3>
-                    <ul>
-                        <li>Assemblaggio componenti</li>
-                        <li>Test elettronici</li>
-                        <li>Collaudo finale</li>
-                        <li>Lavoro di squadra</li>
-                        <li>Organizzazione aziendale</li>
-                    </ul>
-                    <a href="#jma-experience" class="company-link">Vedi esperienza</a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="company-card">
-            <div class="company-inner">
-                <div class="company-front">
-                    <div class="company-logo">
-                        <img src="euroricambi.jpg" alt="Euroricambi">
-                    </div>
-                    <h3>Euroricambi</h3>
-                    <p>Reparto informatico</p>
-                    <p>Novembre - Dicembre 2024</p>
-                </div>
-                <div class="company-back">
-                    <h3>Cosa ho imparato</h3>
-                    <ul>
-                        <li>Configurazione PC</li>
-                        <li>Installazione software</li>
-                        <li>Problem solving</li>
-                        <li>Linguaggi di programmazione</li>
-                        <li>Gestione reti</li>
-                    </ul>
-                    <a href="#euroricambi-experience" class="company-link">Vedi esperienza</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Modal per immagini -->
-    <div id="imageModal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modalImage">
-    </div>
-
-    <footer>
-        <h2>Grazie per aver visto il mio percorso</h2>
-        <p>Queste esperienze PCTO mi hanno permesso di crescere professionalmente e personalmente, acquisendo competenze tecniche e trasversali che porterò con me nel mio futuro.</p>
-        
-        <div class="social-links">
-            <a href="https://github.com/kkcaste" class="social-link"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/kkcaste/" class="social-link"><i class="fab fa-instagram"></i></a>
-            <a href="mailto:vincenzocastelletti06@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+    <!-- COMPETENZE -->
+    <section class="skills-section">
+        <div class="container">
+            <h2 class="section-title">Competenze Acquisite</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-lightbulb"></i></div>
+                    <h3 class="skill-title">Creatività Applicata</h3>
+                    <p class="skill-description">Sviluppata durante l'esperienza al MAST, con focus sul design thinking e problem solving creativo.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-microchip"></i></div>
+                    <h3 class="skill-title">Competenze Tecniche</h3>
+                    <p class="skill-description">Acquisite in JMA Teko, con particolare attenzione all'elettronica e ai processi produttivi.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-code"></i></div>
+                    <h3 class="skill-title">Sviluppo Informatico</h3>
+                    <p class="skill-description">Apprese in Euroricambi, dalla configurazione sistemi alla programmazione base.</p>
+                </div>
+                
+                <div class="skill-card">
+                    <div class="skill-icon"><i class="fas fa-users"></i></div>
+                    <h3 class="skill-title">Soft Skills</h3>
+                    <p class="skill-description">Lavoro di squadra, comunicazione e autonomia sviluppate in tutte le esperienze.</p>
+                </div>
+            </div>
         </div>
-        
-        <div class="signature">Vincenzo Castelletti</div>
-    </footer>
+    </section>
+
+    <!-- CONCLUSIONE -->
+    <section class="conclusion">
+        <div class="conclusion-content">
+            <p class="conclusion-text">
+                Queste esperienze PCTO hanno rappresentato tappe fondamentali nel mio percorso formativo, 
+                permettendomi non solo di acquisire competenze tecniche specifiche, ma anche di sviluppare 
+                quelle soft skills essenziali per il mondo del lavoro. Ogni stage ha contribuito a definire 
+                i miei interessi professionali e a prepararmi per le sfide future.
+            </p>
+            <div class="signature">Vincenzo Castelletti</div>
+        </div>
+    </section>
 
     <script>
-        // Animazione timeline al scroll
+        // Animazioni al caricamento e allo scroll
         document.addEventListener('DOMContentLoaded', function() {
-            const experiences = document.querySelectorAll('.experience');
+            // Animazione header
+            setTimeout(() => {
+                document.querySelector('.scroll-down').style.opacity = '1';
+            }, 1000);
             
-            const observer = new IntersectionObserver((entries) => {
+            // Observer per animazioni al scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const animateOnScroll = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                        entry.target.classList.add('animate');
+                        observer.unobserve(entry.target);
                     }
                 });
-            }, {
-                threshold: 0.1
+            }, observerOptions);
+            
+            // Elementi da animare
+            const experienceCards = document.querySelectorAll('.experience-card');
+            const skillCards = document.querySelectorAll('.skill-card');
+            const conclusionContent = document.querySelector('.conclusion-content');
+            const signature = document.querySelector('.signature');
+            
+            experienceCards.forEach(card => {
+                animateOnScroll.observe(card);
             });
             
-            experiences.forEach(exp => {
-                observer.observe(exp);
+            skillCards.forEach(card => {
+                animateOnScroll.observe(card);
             });
             
-            // Effetto parallax per l'hero
-            window.addEventListener('scroll', function() {
-                const hero = document.querySelector('.hero');
-                const scrollPosition = window.pageYOffset;
-                hero.style.backgroundPositionY = scrollPosition * 0.5 + 'px';
-            });
-        });
-        
-        // Modal per immagini
-        function openModal(img) {
-            const modal = document.getElementById("imageModal");
-            const modalImg = document.getElementById("modalImage");
-            modal.style.display = "block";
-            modalImg.src = img.src;
-        }
-        
-        function closeModal() {
-            document.getElementById("imageModal").style.display = "none";
-        }
-        
-        // Chiudi modal cliccando fuori dall'immagine
-        window.onclick = function(event) {
-            const modal = document.getElementById("imageModal");
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-        
-        // Smooth scroll per i link
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
+            animateOnScroll.observe(conclusionContent);
+            animateOnScroll.observe(signature);
+            
+            // Animazione fluida per lo scroll down
+            document.querySelector('.scroll-down').addEventListener('click', () => {
+                window.scrollTo({
+                    top: document.querySelector('.experiences').offsetTop - 80,
                     behavior: 'smooth'
                 });
             });
